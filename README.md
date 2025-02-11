@@ -1,5 +1,3 @@
-Here’s a sample `README.md` file for your **Blood Donation App** project. You can customize it further based on your specific requirements and features:
-
 ---
 
 # Blood Donation App
@@ -26,41 +24,102 @@ A Flutter-based mobile application designed to connect blood donors with recipie
 
 The app uses the following Firestore collections:
 
-1. **`users`**:
-   - Stores user profile information (e.g., name, email, blood group, location).
-   - Example document structure:
+### 1. **`users`**
+   - Stores user profile information.
+   - **Fields**:
+     - `name` (string): Full name of the user.
+     - `email` (string): User's email address.
+     - `bloodGroup` (string): Blood group of the user (e.g., "O+", "A-").
+     - `location` (string): User's location (e.g., "New York").
+     - `isDonor` (boolean): Indicates if the user is a registered donor.
+     - `phoneNumber` (string): User's contact number.
+   - **Example Document**:
      ```json
      {
        "name": "John Doe",
        "email": "john.doe@example.com",
        "bloodGroup": "O+",
        "location": "New York",
-       "isDonor": true
+       "isDonor": true,
+       "phoneNumber": "+1234567890"
      }
      ```
 
-2. **`donations`**:
+### 2. **`donations`**
    - Stores blood donation requests made by recipients.
-   - Example document structure:
+   - **Fields**:
+     - `recipientId` (string): ID of the recipient making the request.
+     - `bloodGroup` (string): Required blood group (e.g., "A+", "B-").
+     - `location` (string): Location where blood is needed.
+     - `urgency` (string): Urgency level (e.g., "High", "Medium", "Low").
+     - `timestamp` (timestamp): Timestamp of the request.
+     - `status` (string): Status of the request (e.g., "Pending", "Fulfilled").
+   - **Example Document**:
      ```json
      {
        "recipientId": "abc123",
        "bloodGroup": "A+",
        "location": "Los Angeles",
        "urgency": "High",
-       "timestamp": "2023-10-15T12:00:00Z"
+       "timestamp": "2023-10-15T12:00:00Z",
+       "status": "Pending"
      }
      ```
 
-3. **`notifications`**:
+### 3. **`notifications`**
    - Stores notifications for users (e.g., new blood requests, donor matches).
-   - Example document structure:
+   - **Fields**:
+     - `userId` (string): ID of the user receiving the notification.
+     - `message` (string): Notification message.
+     - `timestamp` (timestamp): Timestamp of the notification.
+     - `read` (boolean): Indicates if the notification has been read.
+   - **Example Document**:
      ```json
      {
        "userId": "xyz456",
        "message": "A new blood request matches your blood group.",
        "timestamp": "2023-10-15T12:30:00Z",
        "read": false
+     }
+     ```
+
+### 4. **`donors`**
+   - Stores information about registered blood donors.
+   - **Fields**:
+     - `userId` (string): ID of the user who is a donor.
+     - `bloodGroup` (string): Donor's blood group.
+     - `location` (string): Donor's location.
+     - `lastDonationDate` (timestamp): Date of the last blood donation.
+     - `isAvailable` (boolean): Indicates if the donor is currently available.
+   - **Example Document**:
+     ```json
+     {
+       "userId": "def789",
+       "bloodGroup": "B+",
+       "location": "Chicago",
+       "lastDonationDate": "2023-09-01T00:00:00Z",
+       "isAvailable": true
+     }
+     ```
+
+### 5. **`requests`**
+   - Stores blood requests made by recipients.
+   - **Fields**:
+     - `recipientId` (string): ID of the recipient making the request.
+     - `bloodGroup` (string): Required blood group.
+     - `location` (string): Location where blood is needed.
+     - `urgency` (string): Urgency level (e.g., "High", "Medium", "Low").
+     - `timestamp` (timestamp): Timestamp of the request.
+     - `status` (string): Status of the request (e.g., "Pending", "Fulfilled").
+   - **Example Document**:
+     ```json
+     {
+       "recipientId": "ghi012",
+       "bloodGroup": "AB+",
+       "location": "Houston",
+       "urgency": "Medium",
+       "timestamp": "2023-10-16T10:00:00Z",
+       "status": "Pending"
      }
      ```
 
